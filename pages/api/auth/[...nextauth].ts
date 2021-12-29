@@ -1,5 +1,5 @@
 import NextAuth from 'next-auth';
-import Provider from 'next-auth/providers';
+import CredentialProvider from 'next-auth/providers/credentials';
 import { userType } from '../../../models/user';
 import { correctPassword } from '../../../utils/authHandler';
 import { connectToDatabase } from '../../../utils/db';
@@ -7,14 +7,17 @@ import { pattern } from '../../../utils/homeHandlers';
 
 export default NextAuth({
   session: {
-    jwt: true,
     maxAge: 60 * 60 * 24 * 7,
   },
   secret: process.env.SECRET,
 
   providers: [
-    // Provider.Google({}),
-    Provider.Credentials({
+    CredentialProvider({
+      name: 'Credentials',
+      credentials: {
+        email: { label: 'email', type: 'text' },
+        password: { label: 'Password', type: 'password' },
+      },
       async authorize(credentials: { email: string; password: string }) {
         const { email, password } = credentials;
 

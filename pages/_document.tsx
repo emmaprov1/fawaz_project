@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-sync-scripts */
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 
 class MyDocument extends Document {
@@ -63,11 +64,15 @@ class MyDocument extends Document {
           />
           <meta name="msapplication-TileColor" content="#ffffff" />
         </Head>
-        <body>
-          <div id="modal"></div>
-          <div id="callmodal"></div>
+
+        <body id="page-top">
           <Main />
           <NextScript />
+          <script src="/vendor/jquery/jquery.min.js"></script>
+          <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+          <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+          <script src="/js/sb-admin-2.min.js"></script>
+          <script src="/vendor/chart.js/Chart.min.js"></script>
         </body>
       </Html>
     );
