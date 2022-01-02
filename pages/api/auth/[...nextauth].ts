@@ -43,8 +43,8 @@ export default NextAuth({
         let errorMsg =
           'your account has not been verified check your email and verify your account';
 
-        if (user.type === userType.Hospital)
-          errorMsg = "we'll send you an email once we verify your account";
+        // if (user.type === userType.Hospital)
+        //   errorMsg = "we'll send you an email once we verify your account";
 
         if (!user.verified) throw new Error(errorMsg);
 

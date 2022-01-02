@@ -1,8 +1,6 @@
 export enum userType {
-  Doctor = 'doctor',
-  Patient = 'patient',
+  Staff = 'staff',
   Admin = 'admin',
-  Hospital = 'hospital',
 }
 
 export default interface UserSchema {

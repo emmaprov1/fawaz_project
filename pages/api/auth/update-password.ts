@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { connectToDatabase } from '../../../utils/db';
 import ErrorHandler from '../../../utils/ErrorHandler';
 import { ObjectId } from 'mongodb';
-import { getSession } from 'next-auth/client';
+import { getSession } from 'next-auth/react';
 import { correctPassword, hashPassword } from '../../../utils/authHandler';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -36,14 +36,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         );
 
       res.status(201).json({
-        status: 'success'
+        status: 'success',
       });
     } catch (err) {
       const message = ErrorHandler(err);
 
       res.status(400).json({
         status: 'error',
-        error: message
+        error: message,
       });
     }
   }
