@@ -3,19 +3,16 @@ import Head from 'next/head';
 import { signIn, getSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
-import Image from 'next/image';
-import Link from 'next/link';
 import useInput from '../hooks/use-input';
 import { getUser, pattern } from '../utils/homeHandlers';
 import { connectToDatabase } from '../utils/db';
-// import { ObjectId } from 'mongodb';
 import { userType } from '../models/user';
+import { ObjectId } from 'mongodb';
 
 const SignIn: FC = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [formISValid, setFormValid] = useState(false);
-  const [showHide, setShowHide] = useState(false);
 
   const {
     value: emailValue,
@@ -25,7 +22,6 @@ const SignIn: FC = () => {
     reset: resetEmail,
     valueChangeHandler: emailValueHandler,
     InputFocusHandler: emailFocusHandler,
-    focus: emailFocus,
   } = useInput(value => pattern.test(value));
 
   const {
@@ -36,8 +32,7 @@ const SignIn: FC = () => {
     reset: resetPassword,
     valueChangeHandler: passwordValueHandler,
     InputFocusHandler: passwordFocusHandler,
-    focus: passwordFocus,
-  } = useInput(value => value.trim() !== '');
+  } = useInput(value => value.trim() !== '' && value.length > 7);
 
   useEffect(() => {
     if (emailIsValid && passwordIsValid) setFormValid(true);
@@ -58,7 +53,7 @@ const SignIn: FC = () => {
       .then(res => {
         if (res.error) throw new Error(res.error);
 
-        router.replace('/');
+        router.replace('/admin');
       })
       .catch(err => {
         setError(err.message);
@@ -89,22 +84,36 @@ const SignIn: FC = () => {
           <div className="text-center">
             <h1 className="h4 text-gray-900 mb-4">Welcome Back!</h1>
           </div>
-          <form className="user">
+          <form onSubmit={loggin} className="user">
+            {error && <p className="text-danger text-center">{error}</p>}
+
             <div className="form-group">
               <input
                 type="email"
-                className="form-control form-control-user"
                 id="exampleInputEmail"
                 aria-describedby="emailHelp"
                 placeholder="Enter Email Address..."
+                onBlur={emailBlurHandler}
+                onChange={emailValueHandler}
+                value={emailValue}
+                onFocus={emailFocusHandler}
+                className={`form-control form-control-user${
+                  emailHasError ? ' form-invalid' : ''
+                }`}
               />
             </div>
             <div className="form-group">
               <input
                 type="password"
-                className="form-control form-control-user"
+                className={`form-control form-control-user${
+                  passwordHasError ? ' form-invalid' : ''
+                }`}
                 id="exampleInputPassword"
                 placeholder="Password"
+                onBlur={passwordBlurHandler}
+                onChange={passwordValueHandler}
+                value={passwordValue}
+                onFocus={passwordFocusHandler}
               />
             </div>
             <div className="form-group">
@@ -119,15 +128,18 @@ const SignIn: FC = () => {
                 </label>
               </div>
             </div>
-            <a href="index.html" className="btn btn-primary btn-user btn-block">
-              Login
-            </a>
+            <button
+              disabled={!formISValid || loading}
+              className="btn btn-primary btn-user btn-block"
+            >
+              Sign in
+            </button>
           </form>
           <hr />
           <div className="text-center">
-            <a className="small" href="forgot-password.html">
+            {/* <a className="small" href="forgot-password.html">
               Forgot Password?
-            </a>
+            </a> */}
           </div>
         </div>
       </div>
@@ -138,22 +150,25 @@ const SignIn: FC = () => {
 export const getServerSideProps: GetServerSideProps = async context => {
   const session = await getSession({ req: context.req });
 
-  // if (session) {
-  //   const { db } = await connectToDatabase();
-  //   const id = new ObjectId(session.user.email);
-  //   const user = await getUser(db, id);
+  if (session) {
+    const { db } = await connectToDatabase();
+    const id = new ObjectId(session.user.email);
+    const user = await getUser(db, id);
 
-  //   if (user) {
-  //     let linkGoto = '/';
+    if (user) {
+      let linkGoto;
 
-  //     return {
-  //       redirect: {
-  //         destination: linkGoto,
-  //         permanent: false,
-  //       },
-  //     };
-  //   }
-  // }
+      if (user.type === userType.Admin) linkGoto = '/admin';
+      if (user.type === userType.Staff) linkGoto = '/staff';
+
+      return {
+        redirect: {
+          destination: linkGoto,
+          permanent: false,
+        },
+      };
+    }
+  }
 
   return {
     props: {},

@@ -25,3 +25,9 @@ main.bg-gradient-primary {
     box-shadow: unset !important;
   }
 }
+
+button {
+  &:disabled {
+    cursor: not-allowed;
+  }
+}

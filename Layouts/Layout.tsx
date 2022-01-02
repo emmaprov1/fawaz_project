@@ -13,8 +13,6 @@ const Layout: FC = ({ children }) => {
     e.preventDefault();
   };
 
-  // if ('/404'.includes(router.pathname)) return <>{children}</>;
-
   return (
     <Fragment>
       <Head>

@@ -7,7 +7,7 @@ import { getSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
 
-const Admin: FC = () => {
+const Staff: FC = () => {
   return <div></div>;
 };
 
@@ -34,10 +34,10 @@ export const getServerSideProps: GetServerSideProps = async context => {
       },
     };
 
-  if (user.type === userType.Staff)
+  if (user.type === userType.Admin)
     return {
       redirect: {
-        destination: '/staff',
+        destination: '/admin',
         permanent: false,
       },
     };
@@ -49,4 +49,4 @@ export const getServerSideProps: GetServerSideProps = async context => {
   };
 };
 
-export default Admin;
+export default Staff;

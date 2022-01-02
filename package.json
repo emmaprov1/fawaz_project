@@ -2,7 +2,7 @@
   "name": "fawazia-project",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3030",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -15,8 +15,6 @@
     "ejs": "^3.1.6",
     "firebase": "^9.6.1",
     "html-to-text": "^8.1.0",
-    "jquery": "^3.6.0",
-    "jquery.easing": "^1.4.1",
     "mongodb": "^4.2.2",
     "multer": "^1.4.4",
     "next": "12.0.7",
@@ -31,7 +29,6 @@
     "@types/bcryptjs": "^2.4.2",
     "@types/ejs": "^3.1.0",
     "@types/html-to-text": "^8.0.1",
-    "@types/jquery": "^3.5.11",
     "@types/multer": "^1.4.7",
     "@types/nodemailer": "^6.4.4",
     "@types/react": "^17.0.38",

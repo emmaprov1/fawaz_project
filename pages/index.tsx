@@ -20,7 +20,7 @@ const Index = () => {
   return (
     <>
       <Head>
-        <title>visit </title>
+        <title>visitee - welcome</title>
       </Head>
 
       <div
