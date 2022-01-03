@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongodb';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { getSession } from 'next-auth/client';
+import { getSession } from 'next-auth/react';
 import UserSchema from '../../../models/user';
 import { connectToDatabase } from '../../../utils/db';
 import ErrorHandler from '../../../utils/ErrorHandler';

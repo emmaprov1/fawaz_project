@@ -36,6 +36,7 @@ const SignIn: FC = () => {
 
   useEffect(() => {
     if (emailIsValid && passwordIsValid) setFormValid(true);
+    else setFormValid(false);
   }, [emailIsValid, passwordIsValid]);
 
   const router = useRouter();
@@ -53,7 +54,7 @@ const SignIn: FC = () => {
       .then(res => {
         if (res.error) throw new Error(res.error);
 
-        router.replace('/admin');
+        router.replace('/dashboard');
       })
       .catch(err => {
         setError(err.message);
@@ -156,14 +157,9 @@ export const getServerSideProps: GetServerSideProps = async context => {
     const user = await getUser(db, id);
 
     if (user) {
-      let linkGoto;
-
-      if (user.type === userType.Admin) linkGoto = '/admin';
-      if (user.type === userType.Staff) linkGoto = '/staff';
-
       return {
         redirect: {
-          destination: linkGoto,
+          destination: '/dashboard',
           permanent: false,
         },
       };

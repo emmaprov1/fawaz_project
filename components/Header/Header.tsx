@@ -2,32 +2,29 @@ import { FC, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import { signOut } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 
 const Header: FC = () => {
-  const router = useRouter();
+  const { data } = useSession();
 
-  let links = [
-    { href: '/', name: 'dashboard' },
-    { href: '/appointment', name: 'appointment' },
-    { href: '/see-a-doctor', name: 'doctors' },
-    { href: '/medical-records', name: 'medical records' },
-    { href: '/symptom-checker', name: 'symptom checker' },
-    { href: '/messages', name: 'messages' },
-    { href: '/payments', name: 'payments' },
+  const links = [
+    {
+      href: '/appointments',
+      name: 'Appointments',
+      icon: 'fas fa-calendar-check',
+    },
+    { href: '/visits-history', name: 'History', icon: 'fas fa-history' },
+    {
+      href: '/update-password',
+      name: 'Update Password',
+      icon: 'fas fa-unlock-alt',
+    },
   ];
 
-  if (router.pathname.startsWith('/hospital'))
-    links = [
-      { href: '/hospital', name: 'dashboard' },
-      { href: '/hospital/signup-doctors', name: 'appointment' },
-    ];
-
-  if (router.pathname.startsWith('/doctor'))
-    links = [
-      { href: '/doctor', name: 'dashboard' },
-      { href: '/doctor/appointment', name: 'appointment' },
-    ];
+  const adminLinks = [
+    { href: '/staffs', name: 'All staffs', icon: 'fas fa-user' },
+    { href: '/create-staff', name: 'new staff', icon: 'fas fa-user-plus' },
+  ];
 
   return (
     <header className={`header`}>
@@ -47,7 +44,7 @@ const Header: FC = () => {
         <hr className="sidebar-divider my-0" />
 
         <li className="nav-item active">
-          <Link href="/admin">
+          <Link href="/dashboard">
             <a className="nav-link">
               <i className="fas fa-fw fa-tachometer-alt"></i>
               <span>Dashboard</span>
@@ -57,132 +54,37 @@ const Header: FC = () => {
 
         <hr className="sidebar-divider" />
 
-        <div className="sidebar-heading">Interface</div>
+        <div className="sidebar-heading">Admin and Staff</div>
 
-        <li className="nav-item">
-          <a
-            className="nav-link collapsed"
-            href="#"
-            data-toggle="collapse"
-            data-target="#collapseTwo"
-            aria-expanded="true"
-            aria-controls="collapseTwo"
-          >
-            <i className="fas fa-fw fa-cog"></i>
-            <span>Components</span>
-          </a>
-          <div
-            id="collapseTwo"
-            className="collapse"
-            aria-labelledby="headingTwo"
-            data-parent="#accordionSidebar"
-          >
-            <div className="bg-white py-2 collapse-inner rounded">
-              <h6 className="collapse-header">Custom Components:</h6>
-              <a className="collapse-item" href="buttons.html">
-                Buttons
+        {links.map(cur => (
+          <li className="nav-item" key={cur.name}>
+            <Link href={cur.href}>
+              <a className="nav-link">
+                <i className={cur.icon}></i>
+                <span>{cur.name}</span>
               </a>
-              <a className="collapse-item" href="cards.html">
-                Cards
-              </a>
-            </div>
-          </div>
-        </li>
+            </Link>
+          </li>
+        ))}
 
-        <li className="nav-item">
-          <a
-            className="nav-link collapsed"
-            href="#"
-            data-toggle="collapse"
-            data-target="#collapseUtilities"
-            aria-expanded="true"
-            aria-controls="collapseUtilities"
-          >
-            <i className="fas fa-fw fa-wrench"></i>
-            <span>Utilities</span>
-          </a>
-          <div
-            id="collapseUtilities"
-            className="collapse"
-            aria-labelledby="headingUtilities"
-            data-parent="#accordionSidebar"
-          >
-            <div className="bg-white py-2 collapse-inner rounded">
-              <h6 className="collapse-header">Custom Utilities:</h6>
-              <a className="collapse-item" href="utilities-color.html">
-                Colors
-              </a>
-              <a className="collapse-item" href="utilities-border.html">
-                Borders
-              </a>
-              <a className="collapse-item" href="utilities-animation.html">
-                Animations
-              </a>
-              <a className="collapse-item" href="utilities-other.html">
-                Other
-              </a>
-            </div>
-          </div>
-        </li>
+        {data.user.image === 'admin' && (
+          <>
+            <hr className="sidebar-divider" />
 
-        <hr className="sidebar-divider" />
+            <div className="sidebar-heading">Addons</div>
 
-        <div className="sidebar-heading">Addons</div>
-
-        <li className="nav-item">
-          <a
-            className="nav-link collapsed"
-            href="#"
-            data-toggle="collapse"
-            data-target="#collapsePages"
-            aria-expanded="true"
-            aria-controls="collapsePages"
-          >
-            <i className="fas fa-fw fa-folder"></i>
-            <span>Pages</span>
-          </a>
-          <div
-            id="collapsePages"
-            className="collapse"
-            aria-labelledby="headingPages"
-            data-parent="#accordionSidebar"
-          >
-            <div className="bg-white py-2 collapse-inner rounded">
-              <h6 className="collapse-header">Login Screens:</h6>
-              <a className="collapse-item" href="login.html">
-                Login
-              </a>
-              <a className="collapse-item" href="register.html">
-                Register
-              </a>
-              <a className="collapse-item" href="forgot-password.html">
-                Forgot Password
-              </a>
-              <div className="collapse-divider"></div>
-              <h6 className="collapse-header">Other Pages:</h6>
-              <a className="collapse-item" href="404.html">
-                404 Page
-              </a>
-              <a className="collapse-item" href="blank.html">
-                Blank Page
-              </a>
-            </div>
-          </div>
-        </li>
-
-        <li className="nav-item">
-          <a className="nav-link" href="charts.html">
-            <i className="fas fa-fw fa-chart-area"></i>
-            <span>Charts</span>
-          </a>
-        </li>
-
-        <li className="nav-item">
-          <a className="nav-link" href="tables.html">
-            <i className="fas fa-fw fa-table"></i>
-            <span>Tables</span>
-          </a>
-        </li>
+            {adminLinks.map(cur => (
+              <li className="nav-item" key={cur.name}>
+                <Link href={cur.href}>
+                  <a className="nav-link">
+                    <i className={cur.icon}></i>
+                    <span>{cur.name}</span>
+                  </a>
+                </Link>
+              </li>
+            ))}
+          </>
+        )}
 
         <hr className="sidebar-divider d-none d-md-block" />
 
@@ -191,6 +93,17 @@ const Header: FC = () => {
             className="rounded-circle border-0"
             id="sidebarToggle"
           ></button>
+        </div>
+
+        <hr className="sidebar-divider d-none d-md-block" />
+
+        <div className="text-center d-none d-md-block">
+          <button
+            className="rounded-circle border-0 text-danger"
+            onClick={() => signOut()}
+          >
+            <i className="fas fa-sign-out-alt"></i>
+          </button>
         </div>
       </ul>
     </header>

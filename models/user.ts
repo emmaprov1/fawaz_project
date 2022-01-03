@@ -4,6 +4,7 @@ export enum userType {
 }
 
 export default interface UserSchema {
+  _id: string;
   name: string;
   email: string;
   phoneNumber?: string;

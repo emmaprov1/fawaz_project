@@ -9,11 +9,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
     try {
       const session = getSession({ req });
-
       if (!session) throw new Error('please login');
 
       const { db } = await connectToDatabase();
-
       const id = req.query.id.toString();
 
       const user = await db

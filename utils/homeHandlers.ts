@@ -1,6 +1,7 @@
+import { ObjectId } from 'mongodb';
 import UserSchema from '../models/user';
 
-export const getUser = async (db: any, id: any) => {
+export const getUser = async (db: any, id: ObjectId) => {
   const user: UserSchema = await db.collection('users').findOne(
     { _id: id },
     {

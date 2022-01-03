@@ -6,8 +6,9 @@ import { connectToDatabase } from '../utils/db';
 import { getSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
+import { Session } from 'next-auth';
 
-const Admin: FC = () => {
+const Dashboard: FC<{ session: Session }> = ({ session }) => {
   return <div></div>;
 };
 
@@ -34,19 +35,12 @@ export const getServerSideProps: GetServerSideProps = async context => {
       },
     };
 
-  if (user.type === userType.Staff)
-    return {
-      redirect: {
-        destination: '/staff',
-        permanent: false,
-      },
-    };
-
   return {
     props: {
       session,
+      type: user.type,
     },
   };
 };
 
-export default Admin;
+export default Dashboard;

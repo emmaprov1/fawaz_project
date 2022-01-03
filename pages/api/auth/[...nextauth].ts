@@ -1,6 +1,6 @@
 import NextAuth from 'next-auth';
 import CredentialProvider from 'next-auth/providers/credentials';
-import { userType } from '../../../models/user';
+import UserSchema from '../../../models/user';
 import { correctPassword } from '../../../utils/authHandler';
 import { connectToDatabase } from '../../../utils/db';
 import { pattern } from '../../../utils/homeHandlers';
@@ -10,7 +10,20 @@ export default NextAuth({
     maxAge: 60 * 60 * 24 * 7,
   },
   secret: process.env.SECRET,
-
+  // callbacks: {
+  //   jwt({ token, user, account, profile, isNewUser }) {
+  //     console.log(token, user, account, profile);
+  //     // if (account) {
+  //     //   token.accessToken = account.access_token;
+  //     // }
+  //     return token;
+  //   },
+  //   session({ session, token, user }) {
+  //     console.log('session', token, user, session);
+  //     session.accessToken = token.accessToken;
+  //     return session;
+  //   },
+  // },
   providers: [
     CredentialProvider({
       name: 'Credentials',
@@ -21,36 +34,26 @@ export default NextAuth({
       async authorize(credentials: { email: string; password: string }) {
         const { email, password } = credentials;
 
-        // 1) Check if email/username and password exist
         if (!email || !password)
           throw new Error('please input email/username and password');
+        if (!pattern.test(email)) throw new Error('invalid email');
 
         const { db } = await connectToDatabase();
-        let user: any;
 
-        if (pattern.test(email)) {
-          user = await db.collection('users').findOne({ email, active: true });
-        } else {
-          user = await db
-            .collection('users')
-            .findOne({ username: email, active: true });
-        }
+        const user = await db
+          .collection('users')
+          .findOne({ email, active: true });
 
         // 2) Check if user exists && password is correct
         if (!user || !(await correctPassword(password, user.password)))
           throw new Error('incorrect email/username or password');
 
-        let errorMsg =
-          'your account has not been verified check your email and verify your account';
-
-        // if (user.type === userType.Hospital)
-        //   errorMsg = "we'll send you an email once we verify your account";
-
-        if (!user.verified) throw new Error(errorMsg);
+        const strUSer: UserSchema = JSON.parse(JSON.stringify(user));
 
         // 3) If everything ok, send token to client
         const newUser = {
-          email: user._id,
+          email: strUSer._id,
+          image: strUSer.type,
         };
 
         return newUser;
