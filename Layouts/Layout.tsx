@@ -20,7 +20,7 @@ const Layout: FC = ({ children }) => {
         <title>Fawazia - project</title>
       </Head>
 
-      {!['/', '/sign-in', '/404'].includes(router.pathname) ? (
+      {!['/', '/sign-in', '/404', '/500'].includes(router.pathname) ? (
         <div id="wrapper">
           <Header />
 
