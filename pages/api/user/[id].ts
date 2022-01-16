@@ -9,7 +9,6 @@ import { ObjectId } from 'mongodb';
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'PATCH') {
   }
-    
 };
 
 export default handler;
