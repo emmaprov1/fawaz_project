@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongodb';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { getSession } from 'next-auth/client';
+import { getSession } from 'next-auth/react';
 import { connectToDatabase } from '../../../utils/db';
 import ErrorHandler from '../../../utils/ErrorHandler';
 import multer from 'multer';
@@ -21,8 +21,8 @@ const upload = multer({
   storage: multerStorage,
   fileFilter: multerFilter,
   limits: {
-    fileSize: 10 * 1024 * 1024
-  }
+    fileSize: 10 * 1024 * 1024,
+  },
 });
 
 const uploadPicture = initMiddleware(upload.single('photo'));
@@ -33,8 +33,8 @@ type NextApiRequestWithFormData = NextApiRequest & {
 
 export const config = {
   api: {
-    bodyParser: false
-  }
+    bodyParser: false,
+  },
 };
 
 const handler = async (
@@ -73,14 +73,14 @@ const handler = async (
         );
 
       res.status(200).json({
-        status: 'success'
+        status: 'success',
       });
     } catch (err) {
       const message = ErrorHandler(err);
 
       res.status(400).json({
         status: 'error',
-        error: message
+        error: message,
       });
     }
   }
