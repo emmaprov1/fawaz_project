@@ -44,12 +44,7 @@ const SignIn: FC = () => {
   const loggin = (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
-<<<<<<< HEAD
     setError(''); 
-=======
-    setError('');
-
->>>>>>> 0aefd6fdee7277b4b23292fa1e7f6d114130f1be
     signIn('credentials', {
       redirect: false,
       email: emailValue.toLowerCase(),

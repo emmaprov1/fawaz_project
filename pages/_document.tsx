@@ -31,14 +31,11 @@ class MyDocument extends Document {
             content="#ffffff"
           />
           <meta name="apple-mobile-web-app-title" content="visitee" />
-<<<<<<< HEAD
  
           <link
             rel="stylesheet"
             href="/vendor/datatables/dataTables.bootstrap4.min.css" 
           />
-=======
->>>>>>> 0aefd6fdee7277b4b23292fa1e7f6d114130f1be
           {/* <link
             rel="apple-touch-icon"
             href="/images/icons/rd32.png"
@@ -81,12 +78,9 @@ class MyDocument extends Document {
           <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
           <script src="/vendor/chart.js/Chart.min.js"></script>
           <script src="/js/sb-admin-2.min.js"></script>
-<<<<<<< HEAD
 
           <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
           <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
-=======
->>>>>>> 0aefd6fdee7277b4b23292fa1e7f6d114130f1be
         </body>
       </Html>
     );
