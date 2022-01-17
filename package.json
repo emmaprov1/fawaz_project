@@ -13,11 +13,7 @@
     "bootstrap": "^4.6.1",
     "chart.js": "^2.9.4",
     "ejs": "^3.1.6",
-<<<<<<< HEAD
     "firebase": "^8.6.8",
-=======
-    "firebase": "^9.6.1",
->>>>>>> 0aefd6fdee7277b4b23292fa1e7f6d114130f1be
     "html-to-text": "^8.1.0",
     "mongodb": "^4.2.2",
     "multer": "^1.4.4",
@@ -26,11 +22,8 @@
     "nodemailer": "^6.7.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-<<<<<<< HEAD
     "react-hook-form": "^7.24.0",
     "react-hot-toast": "^2.2.0",
-=======
->>>>>>> 0aefd6fdee7277b4b23292fa1e7f6d114130f1be
     "sass": "^1.45.1",
     "sharp": "^0.29.3"
   },
