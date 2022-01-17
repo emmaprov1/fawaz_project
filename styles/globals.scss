@@ -1,0 +1,33 @@
+$register-image: '/img/makeappointment.svg';
+$login-image: '/img/login.svg';
+
+@import './scss/sb-admin-2.scss';
+@import '~@fortawesome/fontawesome-free/css/all.min.css';
+
+main.bg-gradient-primary {
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.form-invalid {
+  color: #6e707e;
+  background-color: #fff;
+  border-color: #fa5757;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem #ff0e0e98;
+}
+
+.btnn {
+  position: unset !important;
+
+  &:focus {
+    border: none !important;
+    box-shadow: unset !important;
+  }
+}
+
+button {
+  &:disabled {
+    cursor: not-allowed;
+  }
+}

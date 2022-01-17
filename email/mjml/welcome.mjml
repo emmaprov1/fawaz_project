@@ -1,0 +1,40 @@
+<mjml>
+  <mj-body background-color="#ffffff">
+    <mj-section>
+      <mj-column>
+        <mj-image width="162px" src="https://ri-dokita.vercel.app/images/icons/RiDokita.png"></mj-image>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#f3f3f3">
+      <mj-column>
+        <mj-image width="250px" src="https://ri-dokita.vercel.app/images/icons/Signup-img.png"></mj-image>
+      </mj-column>
+      <mj-column>
+        <mj-text font-weight="bold" font-size="24px" color="#000" font-family="helvetica">Welcome To The Healthy Family</mj-text>
+
+        <mj-text align="justify" font-size="15px" color="#000" font-family="Lato">
+        we're so happy to have you here... 
+        </mj-text>
+
+        <!-- <mj-table>
+          <tr style="border-bottom:1px solid #ecedee;text-align:left;padding:15px 0;">
+            <th style="padding: 0 15px 0 0;">Year</th>
+            <th style="padding: 0 15px;">Language</th>
+          </tr>
+          <tr>
+            <td style="padding: 0 15px 0 0;">1995</td>
+            <td style="padding: 0 15px;">PHP</td>
+            
+          </tr>
+          <tr>
+            <td style="padding: 0 15px 0 0;">1995</td>
+            <td style="padding: 0 15px;">JavaScript</td>
+           
+          </tr>
+        </mj-table> -->
+
+        <mj-button align="left" background-color="#1565d8" border-radius="40px" font-family="helvetica" font-size="16px" href="#">Continue Registration</mj-button>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>
