@@ -9,6 +9,7 @@ import { GetServerSideProps } from 'next';
 import { Session } from 'next-auth';
 
 const Dashboard: FC<{ session: Session }> = ({ session }) => {
+<<<<<<< HEAD
   return <div> 
 <div className="container-fluid">
         <h1 className="h3 mb-2 text-gray-800">Dashboard</h1> 
@@ -96,6 +97,9 @@ const Dashboard: FC<{ session: Session }> = ({ session }) => {
 
 
   </div>;
+=======
+  return <div></div>;
+>>>>>>> 0aefd6fdee7277b4b23292fa1e7f6d114130f1be
 };
 
 export const getServerSideProps: GetServerSideProps = async context => {
