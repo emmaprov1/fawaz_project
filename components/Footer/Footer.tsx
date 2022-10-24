@@ -5,7 +5,7 @@ const Footer: FC = () => {
     <footer className="sticky-footer bg-white">
       <div className="container my-auto">
         <div className="copyright text-center my-auto">
-          <span>Copyright © Your Website {new Date().getFullYear()}</span>
+          <span>Copyright © visitee {new Date().getFullYear()}</span>
         </div>
       </div>
     </footer>

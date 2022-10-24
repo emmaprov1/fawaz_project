@@ -15,16 +15,16 @@ import "firebase/database"
 //   appId: '1:775039344798:web:5187e1e2858b31b9f51b8f',
 // };
 
-  
+ 
+
 const firebaseConfig = {
-  apiKey: "AIzaSyBVZeTY5eLiiyngbZZ0b8PQKoZsIY9MqOo",
-  databaseURL: "https://npf-recruitment-102021.firebaseapp.com",
-  authDomain: "npf-recruitment-102021.firebaseapp.com",
-  projectId: "npf-recruitment-102021",
-  storageBucket: "npf-recruitment-102021.appspot.com",
-  messagingSenderId: "425688837510",
-  appId: "1:425688837510:web:b7a44905bf9376935a9007",
-  measurementId: "G-CKDYYK7Z7W"
+  apiKey: "AIzaSyBB9d2tPREBiLzsJzBoHIcd98wTMDTenMg",
+  authDomain: "fawaziatproject.firebaseapp.com",
+  projectId: "fawaziatproject",
+  storageBucket: "fawaziatproject.appspot.com",
+  messagingSenderId: "1057192270767",
+  appId: "1:1057192270767:web:0ec0c6a64ba0d2a8b8ad5a",
+  measurementId: "G-Z76DEQX8JZ"
 };
 
 if (!firebase.apps.length) {
